@@ -1,51 +1,44 @@
-import { CloudArrowUpIcon, LockClosedIcon } from '@heroicons/react/24/outline'
+import BalanceContentCard from "@/components/balance/content";
+import ReplyWrite from "@/components/reply/reply-write";
+import ReplyList from "@/components/reply/reply-list";
+import Divider from "@/components/common/divider";
 
-const features = [
-    {
-        name: 'Push to deploy',
-        description:
-            'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
-        icon: CloudArrowUpIcon,
-    },
-    {
-        name: 'SSL certificates',
-        description:
-            'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
-        icon: LockClosedIcon,
-    },
-
-]
-
+const balanceContent = [
+  {
+    content: "천재 바퀴벌레 사수에게 배우기",
+    value: 1,
+    percent: 60,
+  },
+  {
+    content: "평범한 사수에게 배우기",
+    value: 2,
+    percent: 40,
+  },
+];
 export default function MainContainer() {
-    return (
-        <div className="bg-white py-24 sm:py-32">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto max-w-2xl lg:text-center">
-                    <h2 className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
-                    <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        Everything you need to deploy your app
-                    </p>
-                    <p className="mt-6 text-lg leading-8 text-gray-600">
-                        Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-                        pulvinar et feugiat blandit at. In mi viverra elit nunc.
-                    </p>
-                </div>
-                <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-                    <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-                        {features.map((feature) => (
-                            <div key={feature.name} className="relative pl-16">
-                                <dt className="text-base font-semibold leading-7 text-gray-900">
-                                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                                        <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                                    </div>
-                                    {feature.name}
-                                </dt>
-                                <dd className="mt-2 text-base leading-7 text-gray-600">{feature.description}</dd>
-                            </div>
-                        ))}
-                    </dl>
-                </div>
-            </div>
-        </div>
-    )
+  return (
+    <div>
+      <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8">
+        <section aria-labelledby="details-heading">
+          <div className=" grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
+            {balanceContent.map(({ content, value, percent }, index) => {
+              return (
+                <BalanceContentCard
+                  key={index}
+                  content={content}
+                  value={value}
+                  percent={percent}
+                />
+              );
+            })}
+          </div>
+        </section>
+      </div>
+      <div className="bg-white mx-auto max-w-2xl py-12 sm:px-20 sm:py-16 lg:max-w-5xl lg:px-6 px-6 flex flex-col rounded-t-2xl">
+        <Divider text={"Reply"} />
+        <ReplyWrite />
+        <ReplyList />
+      </div>
+    </div>
+  );
 }
