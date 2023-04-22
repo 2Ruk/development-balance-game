@@ -2,6 +2,7 @@ import BalanceContentCard from "@/components/balance/content";
 import ReplyWrite from "@/components/reply/reply-write";
 import ReplyList from "@/components/reply/reply-list";
 import Divider from "@/components/common/divider";
+import { useRouter } from "next/router";
 
 const balanceContent = [
   {
@@ -16,11 +17,15 @@ const balanceContent = [
   },
 ];
 export default function MainContainer() {
+  const router = useRouter();
+  const { question: questionString } = router.query;
+  const question = Number(questionString);
+
   return (
-    <div>
-      <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8">
+    <div className="max-w-lg mx-auto shadow-2xl bg-gray-300">
+      <div className=" py-8 px-4  lg:px-6 lg:py-8">
         <section aria-labelledby="details-heading">
-          <div className=" grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
+          <div className=" grid grid-rows-2 gap-y-5 ">
             {balanceContent.map(({ content, value, percent }, index) => {
               return (
                 <BalanceContentCard
@@ -34,7 +39,7 @@ export default function MainContainer() {
           </div>
         </section>
       </div>
-      <div className="bg-white mx-auto max-w-2xl py-12 sm:px-20 sm:py-16 lg:max-w-5xl lg:px-6 px-6 flex flex-col rounded-t-2xl">
+      <div className="bg-white mx-auto px-6 pt-10 flex flex-col">
         <Divider text={"Reply"} />
         <ReplyWrite />
         <ReplyList />

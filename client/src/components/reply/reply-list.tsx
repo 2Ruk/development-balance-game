@@ -64,7 +64,6 @@ export default function ReplyList() {
               key={review.id}
               className="flex space-x-4 text-sm text-gray-500"
             >
-              <div className="flex-none py-10 lg:w-10" />
               <div
                 className={classNames(
                   reviewIdx === 0 ? "" : "border-t border-gray-200",

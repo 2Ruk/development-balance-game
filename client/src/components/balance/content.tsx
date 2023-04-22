@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function BalanceContentCard({ content, value, percent }: any) {
+  const router = useRouter();
   const questionVote = () => {
+    // /1 로 이동
+    router.push("/1").then((r) => console.log(r));
     console.log("vote", value);
   };
 
@@ -18,7 +22,7 @@ export default function BalanceContentCard({ content, value, percent }: any) {
 
   return (
     <>
-      <div className="bg-white rounded-2xl">
+      <div className=" rounded-2xl bg-gray-200 shadow-2xl">
         <div>
           <div className=" h-12 flex items-center px-4">
             <svg
@@ -66,7 +70,7 @@ export default function BalanceContentCard({ content, value, percent }: any) {
             <div className="w-full">
               <div className="flex justify-between">
                 <div className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-violet-300 mr-1"></div>
+                  <div className="w-2 h-2 rounded-full bg-green-300 mr-1"></div>
                   <div className="text-lg">{percent}%</div>
                 </div>
               </div>
