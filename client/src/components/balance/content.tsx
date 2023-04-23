@@ -18,22 +18,14 @@ export default function BalanceContentCard({
 
     const timer = setInterval(() => {
       if (animationPercent >= percent) clearInterval(timer);
-      setAnimationPercent(animationPercent + percent / 10);
+      const oneFixed = (percent / 10).toFixed(1);
+      setAnimationPercent(
+        Number(animationPercent.toFixed(1)) + Number(oneFixed)
+      );
     }, 30);
 
     return () => clearInterval(timer);
-  }, [isVote, animationPercent]);
-
-  // useEffect(() => {
-  //   if (!isVote) return;
-  //   if (animationPercent > percent) return;
-  //   const timer = setInterval(() => {
-  //     if (timer > percent) clearInterval(timer);
-  //     setAnimationPercent(animationPercent + 1);
-  //   }, 5);
-  //   if (animationPercent > percent) clearInterval(timer);
-  //   return () => clearInterval(timer);
-  // }, [animationPercent]);
+  }, [isVote, animationPercent, percent]);
 
   const handleVote = () => {
     vote(value);

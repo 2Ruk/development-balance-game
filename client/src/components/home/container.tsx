@@ -20,6 +20,8 @@ const balanceContent = [
   },
 ];
 export default function MainContainer() {
+  const router = useRouter();
+
   const [questionData, setQuestionData] =
     useState<{ content: string; value: number; percent: number }[]>(
       balanceContent
@@ -27,34 +29,52 @@ export default function MainContainer() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isVote, setIsVote] = useState(false);
 
-  const router = useRouter();
   const { question: questionString } = router.query;
   const questionNumber = Number(questionString);
   const getQuestion = async () => {
     if (!questionNumber) return;
-    const { data } = await api.get(`/balance/question/${questionNumber}`, {});
+    const { data } = await api.get(`/balance/question/${questionNumber}`);
     const content = [
-      { content: data.questionA, value: 1, percent: 67 },
-      { content: data.questionB, value: 2, percent: 33 },
+      { content: data.questionA, value: 1, percent: 0 },
+      { content: data.questionB, value: 2, percent: 0 },
     ];
     setQuestionData(content);
     setIsLoaded(true);
   };
-  const questionVote = (value: number) => {
-    console.log("vote", value);
+  const questionVote = async (value: number) => {
+    const { data } = await api.post(`/balance/answer`, {
+      tbq_id: questionNumber,
+      tba_answer: value,
+    });
+    const content = [
+      {
+        content: questionData[0].content,
+        value: 1,
+        percent: data.tba_answer_1,
+      },
+      {
+        content: questionData[1].content,
+        value: 2,
+        percent: data.tba_answer_2,
+      },
+    ];
+    setQuestionData(content);
     setIsVote(true);
   };
 
   const nextQuestion = () => {
     const random = Math.floor(Math.random() * 32 + 1);
     router.push(`/developer/${random}`);
+    setQuestionData(() => balanceContent);
+    setIsLoaded(false);
+    setIsVote(false);
   };
 
   useEffect(() => {
     if (questionNumber && !isLoaded) {
       getQuestion();
     }
-  }, []);
+  }, [isVote]);
 
   return (
     <div
