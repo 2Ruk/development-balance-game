@@ -6,37 +6,30 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
 } from '@nestjs/common';
 import { AnswerService } from './answer.service';
 import { CreateAnswerDto } from './dto/create-answer.dto';
 import { UpdateAnswerDto } from './dto/update-answer.dto';
+import { Request } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('/balance/answer')
 export class AnswerController {
-  constructor(private readonly answerService: AnswerService) {}
+  constructor(
+    private readonly answerService: AnswerService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @Post()
-  create(@Body() createAnswerDto: CreateAnswerDto) {
-    return this.answerService.create(createAnswerDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.answerService.findAll();
+  create(@Req() req: Request, @Body() createAnswerDto: CreateAnswerDto) {
+    const ckName = this.configService.get<string>('QUESTION_COOKIE_NAME');
+    const ckValue = req.cookies[ckName];
+    return this.answerService.create(createAnswerDto, ckValue);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.answerService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAnswerDto: UpdateAnswerDto) {
-    return this.answerService.update(+id, updateAnswerDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.answerService.remove(+id);
+  findByQuestionId(@Param('id') id: string) {
+    return this.answerService.findByQuestionId(Number(id));
   }
 }

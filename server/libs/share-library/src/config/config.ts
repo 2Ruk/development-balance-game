@@ -1,6 +1,7 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 import { QuestionEntity } from '@src/balance/question/entities/question.entity';
+import { AnswerEntity } from '@src/balance/answer/entities/answer.entity';
 
 export const configSetting = () => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -26,7 +27,7 @@ export const dbSetting = async (
     username: dbUsername,
     password: dbPassword,
     database: dbDatabase,
-    entities: [QuestionEntity],
+    entities: [QuestionEntity, AnswerEntity],
     synchronize: true,
     poolSize: 10,
   };

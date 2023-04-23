@@ -1,26 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAnswerDto } from './dto/create-answer.dto';
 import { UpdateAnswerDto } from './dto/update-answer.dto';
+import { AnswerRepository } from '@src/balance/answer/answer.repository';
 
 @Injectable()
 export class AnswerService {
-  create(createAnswerDto: CreateAnswerDto) {
-    return 'This action adds a new answer';
+  constructor(private readonly answerRepository: AnswerRepository) {}
+  async create({ tba_answer, tbq_id }: CreateAnswerDto, ckValue: string) {
+    const item = await this.answerRepository.createAnswer({
+      tba_answer,
+      tbq_id,
+      tba_user_id: ckValue,
+    });
+    console.log(item);
+    return item;
   }
 
-  findAll() {
-    return `This action returns all answer`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} answer`;
-  }
-
-  update(id: number, updateAnswerDto: UpdateAnswerDto) {
-    return `This action updates a #${id} answer`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} answer`;
+  findByQuestionId(tbq_id: number) {
+    return this.answerRepository.groupByQuestionId(tbq_id);
   }
 }
