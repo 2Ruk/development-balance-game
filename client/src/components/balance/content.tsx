@@ -1,24 +1,43 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-export default function BalanceContentCard({ content, value, percent }: any) {
+export default function BalanceContentCard({
+  content,
+  value,
+  percent,
+  isVote,
+  vote,
+}: any) {
   const router = useRouter();
-  const questionVote = () => {
-    // /1 로 이동
-    router.push("/1").then((r) => console.log(r));
-    console.log("vote", value);
-  };
-
   const [animationPercent, setAnimationPercent] = useState(0);
   useEffect(() => {
-    if (animationPercent > percent) return;
+    if (isVote === false) return;
+    if (animationPercent >= percent) {
+      return;
+    }
+
     const timer = setInterval(() => {
-      if (timer > percent) clearInterval(timer);
-      setAnimationPercent(animationPercent + 1);
-    }, 5);
-    if (animationPercent > percent) clearInterval(timer);
+      if (animationPercent >= percent) clearInterval(timer);
+      setAnimationPercent(animationPercent + percent / 10);
+    }, 30);
+
     return () => clearInterval(timer);
-  }, [animationPercent]);
+  }, [isVote, animationPercent]);
+
+  // useEffect(() => {
+  //   if (!isVote) return;
+  //   if (animationPercent > percent) return;
+  //   const timer = setInterval(() => {
+  //     if (timer > percent) clearInterval(timer);
+  //     setAnimationPercent(animationPercent + 1);
+  //   }, 5);
+  //   if (animationPercent > percent) clearInterval(timer);
+  //   return () => clearInterval(timer);
+  // }, [animationPercent]);
+
+  const handleVote = () => {
+    vote(value);
+  };
 
   return (
     <>
@@ -41,7 +60,7 @@ export default function BalanceContentCard({ content, value, percent }: any) {
             </svg>
             <div className="text-gray-700 mr-auto">
               Question
-              <span className="pulse">_</span>
+              <span className="animate-pulse">_</span>
             </div>
             <div className="flex items-center opacity-20">
               <svg
@@ -64,26 +83,28 @@ export default function BalanceContentCard({ content, value, percent }: any) {
         <div className="p-1 px-3">
           <button
             className="min-w-full text-left opacity-75 px-3 pb-5 py-3 font-content h-48 rounded flex flex-col justify-between"
-            onClick={questionVote}
+            onClick={handleVote}
           >
             <p>{content}</p>
-            <div className="w-full">
-              <div className="flex justify-between">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-green-300 mr-1"></div>
-                  <div className="text-lg">{percent}%</div>
+            {isVote && (
+              <div className="w-full">
+                <div className="flex justify-between">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-green-300 mr-1"></div>
+                    <div className="text-lg">{percent}%</div>
+                  </div>
                 </div>
+                <div className="w-full h-1 bg-gray-200 rounded-full mt-1">
+                  <div
+                    className="h-full bg-violet-600 rounded-full"
+                    style={{
+                      width: `${animationPercent}%`,
+                    }}
+                  ></div>
+                </div>
+                <p className="animate-pulse">CLICK!</p>
               </div>
-              <div className="w-full h-1 bg-gray-200 rounded-full mt-1">
-                <div
-                  className="h-full bg-violet-600 rounded-full"
-                  style={{
-                    width: `${animationPercent}%`,
-                  }}
-                ></div>
-              </div>
-              <p className="pulse">CLICK!</p>
-            </div>
+            )}
           </button>
         </div>
         <div>

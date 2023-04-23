@@ -6,10 +6,14 @@ import { useRouter } from "next/router";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const router = useRouter();
+  const { question: questionString } = router.query;
+  const questionNumber = Number(questionString);
+
   return (
     <main className=" bg-white">
       <Header />
-      <MainContainer />
+      <MainContainer key={questionNumber} />
     </main>
   );
 }
