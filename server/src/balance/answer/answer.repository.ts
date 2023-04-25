@@ -37,7 +37,7 @@ export class AnswerRepository {
       .where('answer.tbq_id = :tbq_id', { tbq_id })
       .groupBy('answer.tba_answer')
       .getRawMany();
-    console.log(items);
+
     const total = items.reduce((sum, { count }) => sum + Number(count), 0);
     const percent1 = total
       ? Math.round(
@@ -46,6 +46,7 @@ export class AnswerRepository {
             100,
         )
       : 0;
+
     const tba_answer_1 = isNaN(percent1) ? 0 : percent1;
     const tba_answer_2 = 100 - tba_answer_1;
     return {
