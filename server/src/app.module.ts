@@ -16,6 +16,7 @@ import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
     // cache manger v5 에서는 ttl 이 milliseconds 단위로 변경됨
     CacheModule.register({
       ttl: 3000,
+      max: 10,
       isGlobal: true,
     }),
     QuestionModule,
