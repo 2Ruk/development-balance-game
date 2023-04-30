@@ -17,6 +17,9 @@ export class QuestionEntity {
   @Column({ type: 'text', nullable: false })
   questionB: string;
 
+  @Column({ type: 'varchar' })
+  type: string;
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',

@@ -10,12 +10,6 @@ export class QuestionController {
     private readonly configService: ConfigService,
   ) {}
 
-  @Post()
-  create() {
-    const item = [];
-    return this.questionService.create(item);
-  }
-
   @Get(':id')
   findOne(
     @Param('id') id: string,

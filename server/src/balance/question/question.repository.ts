@@ -10,12 +10,6 @@ export class QuestionRepository {
     private readonly questionRepository: Repository<QuestionEntity>,
   ) {}
 
-  async createQuestion(
-    question: Partial<QuestionEntity>,
-  ): Promise<QuestionEntity> {
-    return await this.questionRepository.save(question);
-  }
-
   async getQuestionById(id: number): Promise<QuestionEntity> {
     return await this.questionRepository.findOne({
       where: {

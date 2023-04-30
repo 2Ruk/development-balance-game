@@ -24,14 +24,6 @@ export class QuestionService {
       },
     );
   }
-  async create(item: any) {
-    for (let it of item) {
-      await this.questionRepository.createQuestion({
-        questionA: it.questionA,
-        questionB: it.questionB,
-      });
-    }
-  }
 
   async getQuestionById(id: number) {
     return await this.questionRepository.getQuestionById(id);
