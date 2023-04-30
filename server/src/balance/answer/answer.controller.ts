@@ -21,6 +21,12 @@ export class AnswerController {
     private readonly configService: ConfigService,
   ) {}
 
+  @Get()
+  findAll(@Req() req: Request) {
+    const ckName = this.configService.get<string>('QUESTION_COOKIE_NAME');
+    const ckValue = req.cookies[ckName];
+    return this.answerService.findAllMapTbqId(ckValue);
+  }
   @Post()
   create(@Req() req: Request, @Body() createAnswerDto: CreateAnswerDto) {
     const ckName = this.configService.get<string>('QUESTION_COOKIE_NAME');

@@ -5,6 +5,10 @@ import { AnswerRepository } from '@src/balance/answer/answer.repository';
 @Injectable()
 export class AnswerService {
   constructor(private readonly answerRepository: AnswerRepository) {}
+  async findAllMapTbqId(ckValue: string) {
+    const list = await this.answerRepository.findAll(ckValue);
+    return list.map(({ question }) => question?.id);
+  }
   async create({ tba_answer, tbq_id }: CreateAnswerDto, ckValue: string) {
     return await this.answerRepository.createAnswer({
       tba_answer,

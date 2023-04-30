@@ -10,6 +10,13 @@ export class AnswerRepository {
     private readonly answerRepository: Repository<AnswerEntity>,
   ) {}
 
+  async findAll(user_id: string) {
+    return await this.answerRepository
+      .createQueryBuilder('answer')
+      .leftJoinAndMapOne('answer.question', 'answer.tbq_id', 'question')
+      .where('answer.tba_user_id = :user_id', { user_id })
+      .getMany();
+  }
   async createAnswer(answer: Partial<AnswerEntity>) {
     try {
       await this.answerRepository.save(answer);
