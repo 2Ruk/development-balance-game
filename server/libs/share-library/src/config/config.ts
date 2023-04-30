@@ -11,7 +11,7 @@ export const configSetting = () => {
   const isProduction = process.env.NODE_ENV === 'production';
   return {
     isGlobal: true,
-    envFilePath: isProduction ? '.env' : '.env.dev',
+    envFilePath: isProduction ? '.env.prod' : '.env.dev',
   };
 };
 

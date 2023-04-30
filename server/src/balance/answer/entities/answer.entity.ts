@@ -32,6 +32,8 @@ export class AnswerEntity {
   })
   created_at: Date;
 
+  question: QuestionEntity;
+
   @UpdateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
