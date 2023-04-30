@@ -101,10 +101,12 @@ export default function MainContainer() {
           </div>
         </section>
       </div>
+
       <div className="bg-white mx-auto px-6 pt-10 flex flex-col">
-        <Divider text={"Reply"} />
-        <ReplyWrite />
-        <ReplyList />
+        몬가 채워질 부분
+        {/*  <Divider text={"Reply"} />*/}
+        {/*  <ReplyWrite />*/}
+        {/*  <ReplyList />*/}
       </div>
     </div>
   );
