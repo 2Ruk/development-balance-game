@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export const BASE_API_URL = `http://localhost:3030/`;
+export const BASE_API_URL =
+  process.env.NODE_ENV === "production"
+    ? `https://api.itquiz.co.kr/`
+    : "http://localhost:3030/";
 
 const instance = axios.create({
   baseURL: BASE_API_URL,

@@ -63,7 +63,7 @@ export default function MainContainer() {
   };
 
   const nextQuestion = () => {
-    const random = Math.floor(Math.random() * 32 + 1);
+    const random = Math.floor(Math.random() * 67 + 1);
     router.push(`/developer/${random}`);
     setQuestionData(() => balanceContent);
     setIsLoaded(false);
@@ -102,7 +102,7 @@ export default function MainContainer() {
         </section>
       </div>
 
-      <div className="bg-white mx-auto px-6 pt-10 flex flex-col">
+      <div className="bg-white mx-auto px-6 p-10 flex flex-col">
         몬가 채워질 부분
         {/*  <Divider text={"Reply"} />*/}
         {/*  <ReplyWrite />*/}
