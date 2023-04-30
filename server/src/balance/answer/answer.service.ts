@@ -1,19 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAnswerDto } from './dto/create-answer.dto';
-import { UpdateAnswerDto } from './dto/update-answer.dto';
 import { AnswerRepository } from '@src/balance/answer/answer.repository';
 
 @Injectable()
 export class AnswerService {
   constructor(private readonly answerRepository: AnswerRepository) {}
   async create({ tba_answer, tbq_id }: CreateAnswerDto, ckValue: string) {
-    const item = await this.answerRepository.createAnswer({
+    return await this.answerRepository.createAnswer({
       tba_answer,
       tbq_id,
       tba_user_id: ckValue,
     });
-    console.log(item);
-    return item;
   }
 
   findByQuestionId(tbq_id: number) {
