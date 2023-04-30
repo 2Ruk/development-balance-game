@@ -62,9 +62,30 @@ export default function MainContainer() {
     setIsVote(true);
   };
 
-  const nextQuestion = () => {
-    const random = Math.floor(Math.random() * 67 + 1);
-    router.push(`/developer/${random}`);
+  const getRandomPage: any = () => {
+    const maxQuestion = 67;
+    const random = Math.floor(Math.random() * maxQuestion + 1);
+    return random;
+  };
+
+  const nextQuestion = async () => {
+    const maxQuestion = 67;
+    const { data } = await api.get(`/balance/answer`);
+    console.log(data);
+    if (data.length === maxQuestion || data.length >= maxQuestion) {
+      router.push(`/developer/end`);
+    } else {
+      let random = Math.floor(Math.random() * maxQuestion + 1);
+      while (data.includes(random)) {
+        random = Math.floor(Math.random() * maxQuestion + 1);
+      }
+      router.push(`/developer/${random}`);
+    }
+    // setCookie("vote", [...getVote, random]);
+    // while (getVote.includes(random)) {
+    //   random = Math.floor(Math.random() * 2 + 1);
+    // }
+    // router.push(`/developer/${random}`);
     setQuestionData(() => balanceContent);
     setIsLoaded(false);
     setIsVote(false);

@@ -94,9 +94,9 @@ export default function BalanceContentCard({
                     }}
                   ></div>
                 </div>
-                <p className="animate-pulse">CLICK!</p>
               </div>
             )}
+            <p className="animate-pulse">CLICK!</p>
           </button>
         </div>
         <div>
