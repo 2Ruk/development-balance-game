@@ -19,10 +19,7 @@ export class QuestionController {
     const ckName = this.configService.get<string>('QUESTION_COOKIE_NAME');
     if (!req.cookies[ckName]) {
       this.questionService.cookieInsert(res);
-    } else {
-      console.log(req.cookies[ckName]);
     }
-
     return this.questionService.getQuestionById(Number(id));
   }
 }
