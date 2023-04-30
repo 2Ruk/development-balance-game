@@ -11,7 +11,7 @@ import {
 import { QuestionEntity } from '@src/balance/question/entities/question.entity';
 
 @Entity('t_balance_answer')
-// @Index(['tba_user_id', 'tbq_id'], { unique: true })
+@Index(['tba_user_id', 'tbq_id'], { unique: true })
 export class AnswerEntity {
   @PrimaryGeneratedColumn()
   tba_id: number;
