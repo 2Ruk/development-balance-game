@@ -25,6 +25,22 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+
+        {/*  google */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-6GWYHE6SCF"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-6GWYHE6SCF');
+              `,
+          }}
+        />
       </Head>
       <Component {...pageProps} />
     </>
