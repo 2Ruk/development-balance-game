@@ -7,13 +7,13 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>IT 밸런스 게임</title>
-        <meta name="twitter:card" content="card" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@isValidUserId" />
         <meta name="twitter:title" content="IT 밸런스 게임" />
         <meta name="twitter:description" content="개발자 밸런스 게임!" />
         <meta
           name="twitter:image"
-          content="https://app.itquiz.co.kr/dev-balance.png"
+          content="https://app.itquiz.co.kr/common/dev-balance.png"
         />
 
         <meta property="og:url" content="https://app.itquiz.co.kr/" />
@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:description" content="개발자 밸런스 게임!" />
         <meta
           property="og:image"
-          content="https://app.itquiz.co.kr/dev-balance.png"
+          content="https://app.itquiz.co.kr/common/dev-balance.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
