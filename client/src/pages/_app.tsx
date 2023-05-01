@@ -7,8 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>IT 밸런스 게임</title>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@isValidUserId" />
+        <meta name="twitter:card" content="card" />
         <meta name="twitter:creator" content="@isValidUserId" />
         <meta name="twitter:title" content="IT 밸런스 게임" />
         <meta name="twitter:description" content="개발자 밸런스 게임!" />
