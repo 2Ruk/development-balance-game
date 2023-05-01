@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 export default function BalanceContentCard({
   content,
@@ -8,8 +7,9 @@ export default function BalanceContentCard({
   isVote,
   vote,
 }: any) {
-  const router = useRouter();
   const [animationPercent, setAnimationPercent] = useState(0);
+  const [isSelect, setIsSelect] = useState(false);
+
   useEffect(() => {
     if (isVote === false) return;
     if (animationPercent >= percent) {
@@ -27,7 +27,11 @@ export default function BalanceContentCard({
     return () => clearInterval(timer);
   }, [isVote, animationPercent, percent]);
 
+  const handleSelect = () => {
+    setIsSelect(true);
+  };
   const handleVote = () => {
+    handleSelect();
     vote(value);
   };
 
@@ -52,7 +56,7 @@ export default function BalanceContentCard({
             </svg>
             <div className="text-gray-700 mr-auto">
               Question
-              <span className="animate-pulse">_</span>
+              <span className="pulse">_</span>
             </div>
             <div className="flex items-center opacity-20">
               <svg
@@ -77,7 +81,30 @@ export default function BalanceContentCard({
             className="min-w-full text-left opacity-75 px-3 pb-5 py-3 font-content h-48 rounded flex flex-col justify-between"
             onClick={handleVote}
           >
-            <p>{content}</p>
+            <p className="text-xl">{content}</p>
+            {isSelect && (
+              <div>
+                <div className=" text-green-500">
+                  <p className="text-xl flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    Your Select
+                  </p>
+                </div>
+              </div>
+            )}
             {isVote && (
               <div className="w-full">
                 <div className="flex justify-between">
@@ -86,7 +113,7 @@ export default function BalanceContentCard({
                     <div className="text-lg">{percent}%</div>
                   </div>
                 </div>
-                <div className="w-full h-1 bg-gray-200 rounded-full mt-1">
+                <div className="w-full h-3 bg-gray-200 rounded-full mt-1">
                   <div
                     className="h-full bg-violet-600 rounded-full"
                     style={{
@@ -96,7 +123,8 @@ export default function BalanceContentCard({
                 </div>
               </div>
             )}
-            <p className="animate-pulse">CLICK!</p>
+
+            {!isVote && <p className="animate-pulse">CLICK!</p>}
           </button>
         </div>
         <div>

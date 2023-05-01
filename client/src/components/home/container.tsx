@@ -71,7 +71,6 @@ export default function MainContainer() {
   const nextQuestion = async () => {
     const maxQuestion = 67;
     const { data } = await api.get(`/balance/answer`);
-    console.log(data);
     if (data.length === maxQuestion || data.length >= maxQuestion) {
       router.push(`/developer/end`);
     } else {
@@ -81,11 +80,6 @@ export default function MainContainer() {
       }
       router.push(`/developer/${random}`);
     }
-    // setCookie("vote", [...getVote, random]);
-    // while (getVote.includes(random)) {
-    //   random = Math.floor(Math.random() * 2 + 1);
-    // }
-    // router.push(`/developer/${random}`);
     setQuestionData(() => balanceContent);
     setIsLoaded(false);
     setIsVote(false);
@@ -124,10 +118,23 @@ export default function MainContainer() {
       </div>
 
       <div className="bg-white mx-auto px-6 p-10 flex flex-col">
-        몬가 채워질 부분
-        {/*  <Divider text={"Reply"} />*/}
-        {/*  <ReplyWrite />*/}
-        {/*  <ReplyList />*/}
+        <div className="bg-white">
+          <div className="px-6 py-12">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                댓글 기능 개발 중
+              </h2>
+              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
+                댓글 기능은 개발 중입니다.
+                <br />
+                감사합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        {/*<Divider text={"Reply"} />*/}
+        {/*<ReplyWrite />*/}
+        {/*<ReplyList />*/}
       </div>
     </div>
   );
