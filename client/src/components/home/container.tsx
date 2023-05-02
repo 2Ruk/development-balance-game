@@ -96,7 +96,12 @@ export default function MainContainer() {
       className="max-w-lg mx-auto shadow-2xl bg-gray-300"
       key={questionNumber}
     >
-      <div className=" py-8 px-4  lg:px-6 lg:py-8">
+      <div className=" py-1 px-4  lg:px-6 lg:py-4">
+        <div className="py-1 lg:mb-4">
+          <p className="p-3 text-xl font-bold text-gray-800">
+            둘 중 선호하는 것을 선택해주세요
+          </p>
+        </div>
         <section aria-labelledby="details-heading" className="relative">
           <NextModal open={isVote} nextQuestion={nextQuestion} />
 
@@ -116,7 +121,6 @@ export default function MainContainer() {
           </div>
         </section>
       </div>
-
       <div className="bg-white mx-auto px-6 p-10 flex flex-col">
         <div className="bg-white">
           <div className="px-6 py-12">
